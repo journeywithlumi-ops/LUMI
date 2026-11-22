@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey with LUMI — 도시 여행 지도 &amp; 릴스</title>
+  <meta name="description" content="세계 도시를 수채화 포스터와 여행 지도로 기록합니다. 도시를 눌러 인스타 릴스와 일러스트 지도를 모아보세요." />
+  <meta name="theme-color" content="#FAF6F0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Journey with LUMI — 도시 여행 지도 & 릴스" />
+  <meta property="og:description" content="세계 도시를 수채화 포스터와 여행 지도로 기록합니다. 도시를 눌러 인스타 릴스와 일러스트 지도를 모아보세요." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23C86D51'/%3E%3Ctext x='50' y='63' font-family='Georgia,serif' font-size='30' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --card: #FFFFFF;
+      --ink: #231F20;
+      --muted: #7B7269;
+      --accent: #C86D51;
+      --line: #E8DFD3;
+      --chip: #EFE7DC;
+      --serif: Georgia, "Nanum Myeongjo", "Apple SD Gothic Neo", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 28px 16px 40px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .mark {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-indent: 0.14em;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .handle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 5px;
+      letter-spacing: 0.02em;
+    }
+    .bio {
+      font-size: 12.5px;
+      color: #4A433C;
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+    .quick-links {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 13px;
+      flex-wrap: wrap;
+    }
+    .quick-links a,
+    .quick-links span {
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 7px 13px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .quick-links span {
+      color: #A69C90;
+      background: transparent;
+      border-style: dashed;
+    }
+    .tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 2px 0 14px;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .tab.active {
+      background: var(--ink);
+      color: #FFF;
+      border-color: var(--ink);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .card {
+      display: block;
+      width: 100%;
+      padding: 0;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .card:active { transform: scale(0.98); }
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .thumb-wrap {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: var(--chip);
+    }
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(35, 31, 32, 0.82);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .card-body {
+      padding: 10px 11px 12px;
+    }
+    .city-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .city-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .empty, .error {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 32px 8px;
+      line-height: 1.6;
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 17, 15, 0.62);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 50;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      width: 100%;
+      max-width: 440px;
+      max-height: 90vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg);
+      border-radius: 22px 22px 0 0;
+      padding: 16px 16px 26px;
+    }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .modal-sub {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .modal-close {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--ink);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .map-box {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #FFF;
+      margin-bottom: 6px;
+    }
+    .map-box img {
+      width: 100%;
+      display: block;
+    }
+    .map-hint {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      margin-bottom: 12px;
+    }
+    .reel-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .reel-btn small {
+      flex: 0 0 auto;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .save-btn {
+      display: block;
+      text-align: center;
+      background: var(--accent);
+      color: #FFF;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 26px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">LUMI</div>
+      <h1 class="brand">Journey with LUMI</h1>
+      <div class="handle">@journeywithlumi</div>
+      <p class="bio">세계 도시를 수채화 포스터와 여행 지도로 기록합니다.<br>도시를 눌러 릴스와 지도를 모아보세요.</p>
+      <div class="quick-links">
+        <a href="https://www.instagram.com/journeywithlumi/" target="_blank" rel="noopener">Instagram</a>
+        <span>YouTube Shorts 준비중</span>
+        <span>Etsy 준비중</span>
+      </div>
+    </header>
+
+    <div class="tabs" id="tabs" role="tablist" aria-label="권역 선택">
+      <button class="tab active" data-region="all" role="tab" aria-selected="true">전체</button>
+      <button class="tab" data-region="europe" role="tab" aria-selected="false">유럽</button>
+      <button class="tab" data-region="asia" role="tab" aria-selected="false">아시아</button>
+      <button class="tab" data-region="turkey" role="tab" aria-selected="false">튀르키예</button>
+    </div>
+
+    <div class="grid" id="grid" aria-live="polite"></div>
+
+    <footer>Illustrated maps &amp; posters by Journey with LUMI<br>지도 · 포스터 이미지는 개인 저장용으로 자유롭게 쓰셔도 좋습니다.</footer>
+  </div>
+
+  <div class="modal-backdrop" id="backdrop">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="mTitle"></div>
+          <div class="modal-sub" id="mSub"></div>
+        </div>
+        <button class="modal-close" id="mClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="map-box"><img id="mMap" src="" alt="" /></div>
+      <div class="map-hint">이미지를 길게 누르면 저장할 수 있어요</div>
+      <div id="mReels"></div>
+      <a class="save-btn" id="mSave" href="" target="_blank" rel="noopener">지도 크게 보기 · 저장</a>
+    </div>
+  </div>
+
+  <script>
+    const state = { cities: [], region: 'all', lastFocus: null };
+
+    const grid = document.getElementById('grid');
+    const backdrop = document.getElementById('backdrop');
+    const modal = document.getElementById('modal');
+    const closeBtn = document.getElementById('mClose');
+
+    fetch('cities.json', { cache: 'no-cache' })
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then((data) => {
+        state.cities = Array.isArray(data) ? data : [];
+        render();
+      })
+      .catch(() => {
+        grid.innerHTML = '<p class="error">도시 목록을 불러오지 못했어요.<br>잠시 후 새로고침해 주세요.</p>';
+      });
+
+    function render() {
+      const list = state.region === 'all'
+        ? state.cities
+        : state.cities.filter((c) => c.region === state.region);
+
+      if (!list.length) {
+        grid.innerHTML = '<p class="empty">이 권역의 도시를 준비하고 있어요.</p>';
+        return;
+      }
+
+      grid.innerHTML = list.map((c) => `
+        <button class="card" type="button" data-id="${c.id}" aria-label="${c.cityKo} 지도와 릴스 보기">
+          <div class="thumb-wrap">
+            <img src="${c.poster}" alt="${c.cityKo} 여행 포스터" width="900" height="1125" loading="lazy" decoding="async" />
+            <span class="badge">릴 ${c.reels.length}편</span>
+          </div>
+          <div class="card-body">
+            <div class="city-name">${c.cityKo} · ${c.city}</div>
+            <div class="city-meta">${c.regionLabel}</div>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      if (card) openCity(card.dataset.id, card);
+    });
+
+    document.getElementById('tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.tab');
+      if (!tab) return;
+      document.querySelectorAll('.tab').forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      state.region = tab.dataset.region;
+      render();
+    });
+
+    function openCity(id, source) {
+      const c = state.cities.find((x) => x.id === id);
+      if (!c) return;
+
+      state.lastFocus = source || null;
+      document.getElementById('mTitle').textContent = `${c.cityKo} (${c.city})`;
+      document.getElementById('mSub').textContent = `${c.regionLabel} · 릴스 ${c.reels.length}편 · 여행 지도 1장`;
+
+      const mapImg = document.getElementById('mMap');
+      mapImg.src = c.map;
+      mapImg.alt = `${c.cityKo} 일러스트 여행 지도`;
+
+      document.getElementById('mSave').href = c.map;
+
+      document.getElementById('mReels').innerHTML = c.reels.map((r, i) => `
+        <a class="reel-btn" href="${r.url}" target="_blank" rel="noopener">
+          <span>▶ 릴스 #${i + 1} · ${r.title}</span>
+          <small>인스타 보기 →</small>
+        </a>
+      `).join('');
+
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus({ preventScroll: true });
+    }
+
+    function closeModal() {
+      if (!backdrop.classList.contains('open')) return;
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      if (state.lastFocus) state.lastFocus.focus({ preventScroll: true });
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
