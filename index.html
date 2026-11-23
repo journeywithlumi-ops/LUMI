@@ -263,7 +263,11 @@
     /* Modal */
     .modal-backdrop {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh; /* fallback */
+      height: 100dvh;
       background: rgba(20, 17, 15, 0.62);
       display: none;
       align-items: flex-end;
