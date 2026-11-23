@@ -121,6 +121,77 @@
       color: #FFF;
       border-color: var(--ink);
     }
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0 13px;
+      margin: 0 0 12px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .search:focus-within {
+      border-color: #D8C6B1;
+      box-shadow: 0 0 0 3px rgba(200, 109, 81, 0.07);
+    }
+    .search-icon {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      color: var(--muted);
+      display: block;
+    }
+    .search input {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--ink);
+      padding: 12px 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .search input::placeholder { color: #A69C90; }
+    .search input::-webkit-search-cancel-button,
+    .search input::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+      display: none;
+    }
+    .search-clear {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .search-clear.show { display: flex; }
+    .search-clear:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    .count {
+      font-size: 12px;
+      color: var(--muted);
+      margin: -2px 2px 10px;
+      letter-spacing: 0.01em;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -314,12 +385,33 @@
       </div>
     </header>
 
+    <div class="search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+      </svg>
+      <input
+        id="q"
+        type="search"
+        placeholder="도시 또는 나라 검색"
+        aria-label="도시 또는 나라 검색"
+        autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        enterkeyhint="search"
+      />
+      <button class="search-clear" id="qClear" type="button" aria-label="검색어 지우기">✕</button>
+    </div>
+
     <div class="tabs" id="tabs" role="tablist" aria-label="권역 선택">
       <button class="tab active" data-region="all" role="tab" aria-selected="true">전체</button>
       <button class="tab" data-region="europe" role="tab" aria-selected="false">유럽</button>
       <button class="tab" data-region="asia" role="tab" aria-selected="false">아시아</button>
       <button class="tab" data-region="turkey" role="tab" aria-selected="false">튀르키예</button>
     </div>
+
+    <div class="count" id="count" aria-live="polite"></div>
 
     <div class="grid" id="grid" aria-live="polite"></div>
 
@@ -343,12 +435,26 @@
   </div>
 
   <script>
-    const state = { cities: [], region: 'all', lastFocus: null };
+    const state = { cities: [], region: 'all', query: '', lastFocus: null };
 
     const grid = document.getElementById('grid');
+    const countEl = document.getElementById('count');
+    const input = document.getElementById('q');
+    const clearBtn = document.getElementById('qClear');
     const backdrop = document.getElementById('backdrop');
     const modal = document.getElementById('modal');
     const closeBtn = document.getElementById('mClose');
+
+    const REGION_NAMES = { europe: '유럽', asia: '아시아', turkey: '튀르키예 터키' };
+
+    // 검색용 정규화: 소문자, 악센트 제거, 공백/구두점 제거
+    function normalize(s) {
+      return (s == null ? '' : String(s))
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[\s\-_.·'’]/g, '');
+    }
 
     fetch('cities.json', { cache: 'no-cache' })
       .then((r) => {
@@ -357,19 +463,41 @@
       })
       .then((data) => {
         state.cities = Array.isArray(data) ? data : [];
+        state.cities.forEach((c) => {
+          c.searchKey = normalize([
+            c.cityKo,
+            c.city,
+            c.country,
+            c.regionLabel,
+            REGION_NAMES[c.region],
+          ].join(' '));
+        });
         render();
       })
       .catch(() => {
+        countEl.textContent = '';
         grid.innerHTML = '<p class="error">도시 목록을 불러오지 못했어요.<br>잠시 후 새로고침해 주세요.</p>';
       });
 
+    function filterCities() {
+      const q = normalize(state.query);
+      return state.cities.filter((c) => {
+        if (state.region !== 'all' && c.region !== state.region) return false;
+        if (q && !c.searchKey.includes(q)) return false;
+        return true;
+      });
+    }
+
     function render() {
-      const list = state.region === 'all'
-        ? state.cities
-        : state.cities.filter((c) => c.region === state.region);
+      const list = filterCities();
+      const q = normalize(state.query);
+
+      countEl.textContent = state.cities.length ? `${list.length}개의 도시` : '';
 
       if (!list.length) {
-        grid.innerHTML = '<p class="empty">이 권역의 도시를 준비하고 있어요.</p>';
+        grid.innerHTML = q
+          ? '<p class="empty">찾으시는 도시가 아직 없어요.<br>다른 도시나 나라 이름으로 검색해 보세요.</p>'
+          : '<p class="empty">이 권역의 도시를 준비하고 있어요.</p>';
         return;
       }
 
@@ -403,6 +531,34 @@
       state.region = tab.dataset.region;
       render();
     });
+
+    function syncClearButton() {
+      clearBtn.classList.toggle('show', input.value.length > 0);
+    }
+
+    input.addEventListener('input', () => {
+      state.query = input.value;
+      syncClearButton();
+      render();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && input.value) {
+        e.preventDefault();
+        clearSearch();
+      }
+    });
+
+    function clearSearch() {
+      if (!input.value) return;
+      input.value = '';
+      state.query = '';
+      syncClearButton();
+      render();
+      input.focus({ preventScroll: true });
+    }
+
+    clearBtn.addEventListener('click', clearSearch);
 
     function openCity(id, source) {
       const c = state.cities.find((x) => x.id === id);
