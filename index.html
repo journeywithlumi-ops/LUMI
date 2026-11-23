@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Journey with LUMI — 도시 여행 지도 &amp; 릴스</title>
-  <meta name="description" content="세계 도시를 수채화 포스터와 여행 지도로 기록합니다. 도시를 눌러 인스타 릴스와 일러스트 지도를 모아보세요." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Journey with LUMI — Travel Posters &amp; City Maps</title>
+  <meta name="description" content="Watercolor travel posters and illustrated city maps. Tap any city to explore Reels and save its map." />
   <meta name="theme-color" content="#FAF6F0" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Journey with LUMI — 도시 여행 지도 & 릴스" />
-  <meta property="og:description" content="세계 도시를 수채화 포스터와 여행 지도로 기록합니다. 도시를 눌러 인스타 릴스와 일러스트 지도를 모아보세요." />
+  <meta property="og:title" content="Journey with LUMI — Travel Posters &amp; City Maps" />
+  <meta property="og:description" content="Watercolor travel posters and illustrated city maps. Tap any city to explore Reels and save its map." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23C86D51'/%3E%3Ctext x='50' y='63' font-family='Georgia,serif' font-size='30' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
@@ -33,7 +33,7 @@
     .wrap {
       max-width: 440px;
       margin: 0 auto;
-      padding: 28px 16px 40px;
+      padding: 28px max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left));
     }
     header {
       text-align: center;
@@ -259,6 +259,7 @@
       padding: 32px 8px;
       line-height: 1.6;
     }
+
     /* Modal */
     .modal-backdrop {
       position: fixed;
@@ -268,47 +269,77 @@
       align-items: flex-end;
       justify-content: center;
       z-index: 50;
+      padding: max(16px, env(safe-area-inset-top))
+               max(16px, env(safe-area-inset-right))
+               max(16px, env(safe-area-inset-bottom))
+               max(16px, env(safe-area-inset-left));
+      overscroll-behavior: contain;
     }
     .modal-backdrop.open { display: flex; }
     .modal {
       width: 100%;
       max-width: 440px;
-      max-height: 90vh;
+      max-height: 90vh; /* fallback for browsers without dvh */
+      max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 32px);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
       background: var(--bg);
-      border-radius: 22px 22px 0 0;
-      padding: 16px 16px 26px;
+      border-radius: 22px;
+      padding: 0;
+      box-shadow: 0 18px 50px rgba(20, 17, 15, 0.28);
     }
     .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 10;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 12px;
+      padding: 14px 16px 12px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      border-radius: 22px 22px 0 0;
     }
+    .modal-head-text { min-width: 0; }
     .modal-title {
       font-family: var(--serif);
       font-size: 20px;
       font-weight: 600;
+      line-height: 1.25;
     }
     .modal-sub {
       font-size: 11.5px;
       color: var(--muted);
       margin-top: 4px;
+      line-height: 1.45;
     }
     .modal-close {
       flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin: -4px -6px 0 0;
       border: 1px solid var(--line);
       background: var(--chip);
       color: var(--ink);
-      width: 32px;
-      height: 32px;
       border-radius: 50%;
-      font-size: 14px;
+      font-family: inherit;
+      font-size: 16px;
       line-height: 1;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
+    .modal-close:active { background: #E1D6C6; }
+    .modal-close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .modal-body { padding: 14px 16px 24px; }
     .map-box {
       border-radius: 14px;
       overflow: hidden;
@@ -343,6 +374,7 @@
       color: var(--ink);
       font-size: 13px;
       font-weight: 600;
+      line-height: 1.35;
     }
     .reel-btn small {
       flex: 0 0 auto;
@@ -377,11 +409,11 @@
       <div class="mark">LUMI</div>
       <h1 class="brand">Journey with LUMI</h1>
       <div class="handle">@journeywithlumi</div>
-      <p class="bio">세계 도시를 수채화 포스터와 여행 지도로 기록합니다.<br>도시를 눌러 릴스와 지도를 모아보세요.</p>
+      <p class="bio">Watercolor travel posters &amp; illustrated city maps.<br>Tap any city to explore Reels &amp; save maps.</p>
       <div class="quick-links">
         <a href="https://www.instagram.com/journeywithlumi/" target="_blank" rel="noopener">Instagram</a>
-        <span>YouTube Shorts 준비중</span>
-        <span>Etsy 준비중</span>
+        <span>YouTube Shorts · Soon</span>
+        <span>Etsy · Soon</span>
       </div>
     </header>
 
@@ -393,49 +425,51 @@
       <input
         id="q"
         type="search"
-        placeholder="도시 또는 나라 검색"
-        aria-label="도시 또는 나라 검색"
+        placeholder="Search city or country"
+        aria-label="Search city or country"
         autocomplete="off"
         autocapitalize="off"
         autocorrect="off"
         spellcheck="false"
         enterkeyhint="search"
       />
-      <button class="search-clear" id="qClear" type="button" aria-label="검색어 지우기">✕</button>
+      <button class="search-clear" id="qClear" type="button" aria-label="Clear search">✕</button>
     </div>
 
-    <div class="tabs" id="tabs" role="tablist" aria-label="권역 선택">
-      <button class="tab active" data-region="all" role="tab" aria-selected="true">전체</button>
-      <button class="tab" data-region="europe" role="tab" aria-selected="false">유럽</button>
-      <button class="tab" data-region="asia" role="tab" aria-selected="false">아시아</button>
-      <button class="tab" data-region="turkey" role="tab" aria-selected="false">튀르키예</button>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Filter by region">
+      <button class="tab active" data-region="all" role="tab" aria-selected="true">All</button>
+      <button class="tab" data-region="europe" role="tab" aria-selected="false">Europe</button>
+      <button class="tab" data-region="asia" role="tab" aria-selected="false">Asia</button>
+      <button class="tab" data-region="turkey" role="tab" aria-selected="false">Türkiye</button>
     </div>
 
     <div class="count" id="count" aria-live="polite"></div>
 
     <div class="grid" id="grid"></div>
 
-    <footer>Illustrated maps &amp; posters by Journey with LUMI<br>지도 · 포스터 이미지는 개인 저장용으로 자유롭게 쓰셔도 좋습니다.</footer>
+    <footer>Illustrated maps &amp; posters by Journey with LUMI<br>Artwork &amp; maps are free for personal use.</footer>
   </div>
 
   <div class="modal-backdrop" id="backdrop">
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
       <div class="modal-head">
-        <div>
+        <div class="modal-head-text">
           <div class="modal-title" id="mTitle"></div>
           <div class="modal-sub" id="mSub"></div>
         </div>
-        <button class="modal-close" id="mClose" aria-label="닫기">✕</button>
+        <button class="modal-close" id="mClose" type="button" aria-label="Close">✕</button>
       </div>
-      <div class="map-box"><img id="mMap" src="" alt="" /></div>
-      <div class="map-hint">이미지를 길게 누르면 저장할 수 있어요</div>
-      <div id="mReels"></div>
-      <a class="save-btn" id="mSave" href="" target="_blank" rel="noopener">지도 크게 보기 · 저장</a>
+      <div class="modal-body">
+        <div class="map-box"><img id="mMap" src="" alt="" /></div>
+        <div class="map-hint">Press &amp; hold the map to save</div>
+        <div id="mReels"></div>
+        <a class="save-btn" id="mSave" href="" target="_blank" rel="noopener">View &amp; Save Full Map</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const state = { cities: [], region: 'all', query: '', lastFocus: null };
+    const state = { cities: [], region: 'all', query: '', lastFocus: null, lockY: 0 };
 
     const grid = document.getElementById('grid');
     const countEl = document.getElementById('count');
@@ -445,7 +479,14 @@
     const modal = document.getElementById('modal');
     const closeBtn = document.getElementById('mClose');
 
-    const REGION_NAMES = { europe: '유럽', asia: '아시아', turkey: '튀르키예 터키' };
+    // Korean names stay in the search index so both scripts keep matching.
+    const REGION_SEARCH = {
+      europe: '유럽 Europe',
+      asia: '아시아 Asia',
+      turkey: '튀르키예 터키 Türkiye Turkey',
+    };
+
+    const reelsLabel = (n) => (n === 1 ? '1 Reel' : n + ' Reels');
 
     // 검색용 정규화: 소문자, 악센트 제거, 공백/구두점 제거
     function normalize(s) {
@@ -468,15 +509,17 @@
             c.cityKo,
             c.city,
             c.country,
+            c.countryKo,
             c.regionLabel,
-            REGION_NAMES[c.region],
+            c.regionKo,
+            REGION_SEARCH[c.region],
           ].join(' '));
         });
         render();
       })
       .catch(() => {
         countEl.textContent = '';
-        grid.innerHTML = '<p class="error">도시 목록을 불러오지 못했어요.<br>잠시 후 새로고침해 주세요.</p>';
+        grid.innerHTML = '<p class="error">Couldn\u2019t load the city list.<br>Please refresh in a moment.</p>';
       });
 
     function filterCities() {
@@ -492,23 +535,23 @@
       const list = filterCities();
       const q = normalize(state.query);
 
-      countEl.textContent = state.cities.length ? `${list.length}개의 도시` : '';
+      countEl.textContent = state.cities.length ? `${list.length} ${list.length === 1 ? 'city' : 'cities'}` : '';
 
       if (!list.length) {
         grid.innerHTML = q
-          ? '<p class="empty">찾으시는 도시가 아직 없어요.<br>다른 도시나 나라 이름으로 검색해 보세요.</p>'
-          : '<p class="empty">이 권역의 도시를 준비하고 있어요.</p>';
+          ? '<p class="empty">No cities match your search.<br>Try another city or country name.</p>'
+          : '<p class="empty">No cities in this region yet.<br>More are on the way.</p>';
         return;
       }
 
       grid.innerHTML = list.map((c) => `
-        <button class="card" type="button" data-id="${c.id}" aria-label="${c.cityKo} 지도와 릴스 보기">
+        <button class="card" type="button" data-id="${c.id}" aria-label="${c.city} — map and Reels">
           <div class="thumb-wrap">
-            <img src="${c.poster}" alt="${c.cityKo} 여행 포스터" width="900" height="1125" loading="lazy" decoding="async" />
-            <span class="badge">릴 ${c.reels.length}편</span>
+            <img src="${c.poster}" alt="${c.city} travel poster" width="900" height="1125" loading="lazy" decoding="async" />
+            <span class="badge">${reelsLabel(c.reels.length)}</span>
           </div>
           <div class="card-body">
-            <div class="city-name">${c.cityKo} · ${c.city}</div>
+            <div class="city-name">${c.city}</div>
             <div class="city-meta">${c.regionLabel}</div>
           </div>
         </button>
@@ -560,36 +603,60 @@
 
     clearBtn.addEventListener('click', clearSearch);
 
+    // iOS Safari keeps scrolling the page behind a fixed overlay; pin the body instead.
+    function lockBody() {
+      state.lockY = window.scrollY || window.pageYOffset || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${state.lockY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function unlockBody() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, state.lockY);
+    }
+
     function openCity(id, source) {
       const c = state.cities.find((x) => x.id === id);
       if (!c) return;
 
       state.lastFocus = source || null;
-      document.getElementById('mTitle').textContent = `${c.cityKo} (${c.city})`;
-      document.getElementById('mSub').textContent = `${c.regionLabel} · 릴스 ${c.reels.length}편 · 여행 지도 1장`;
+      document.getElementById('mTitle').textContent = c.city;
+      document.getElementById('mSub').textContent =
+        `${c.regionLabel} · ${reelsLabel(c.reels.length)} · 1 Map`;
 
       const mapImg = document.getElementById('mMap');
       mapImg.src = c.map;
-      mapImg.alt = `${c.cityKo} 일러스트 여행 지도`;
+      mapImg.alt = `${c.city} illustrated travel map`;
 
       document.getElementById('mSave').href = c.map;
 
       document.getElementById('mReels').innerHTML = c.reels.map((r, i) => `
         <a class="reel-btn" href="${r.url}" target="_blank" rel="noopener">
-          <span>▶ 릴스 #${i + 1} · ${r.title}</span>
-          <small>인스타 보기 →</small>
+          <span>▶ Reel #${i + 1} · ${r.title}</span>
+          <small>Instagram →</small>
         </a>
       `).join('');
 
+      lockBody();
       backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      modal.scrollTop = 0;
       closeBtn.focus({ preventScroll: true });
     }
 
     function closeModal() {
       if (!backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
-      document.body.style.overflow = '';
+      modal.scrollTop = 0;
+      unlockBody();
       if (state.lastFocus) state.lastFocus.focus({ preventScroll: true });
     }
 

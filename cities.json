@@ -4,13 +4,15 @@
     "city": "Hallstatt",
     "cityKo": "할슈타트",
     "country": "Austria",
+    "countryKo": "오스트리아",
     "region": "europe",
-    "regionLabel": "중부유럽 · 오스트리아",
+    "regionLabel": "Central Europe · Austria",
+    "regionKo": "중부유럽",
     "poster": "assets/hallstatt/poster.jpg",
     "map": "assets/hallstatt/map.jpg",
     "reels": [
-      { "title": "할슈타트 5대 뷰 (9:16)", "url": "https://www.instagram.com/journeywithlumi/" },
-      { "title": "할슈타트 겨울 에디션 (4:5)", "url": "https://www.instagram.com/journeywithlumi/" },
+      { "title": "Hallstatt's 5 Best Views", "url": "https://www.instagram.com/journeywithlumi/" },
+      { "title": "Hallstatt in Winter", "url": "https://www.instagram.com/journeywithlumi/" },
       { "title": "6 Must-See Stops in Half a Day", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
@@ -19,13 +21,15 @@
     "city": "Seville",
     "cityKo": "세비야",
     "country": "Spain",
+    "countryKo": "스페인",
     "region": "europe",
-    "regionLabel": "서유럽 · 스페인",
+    "regionLabel": "Western Europe · Spain",
+    "regionKo": "서유럽",
     "poster": "assets/seville/poster.jpg",
     "map": "assets/seville/map.jpg",
     "reels": [
-      { "title": "스페인 광장 포토스팟 (Plaza de España)", "url": "https://www.instagram.com/journeywithlumi/" },
-      { "title": "세비야 대성당 & 알카사르", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "Plaza de España Photo Spots", "url": "https://www.instagram.com/journeywithlumi/" },
+      { "title": "Seville Cathedral & Alcázar", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -33,12 +37,14 @@
     "city": "Český Krumlov",
     "cityKo": "체스키 크롬로프",
     "country": "Czechia",
+    "countryKo": "체코",
     "region": "europe",
-    "regionLabel": "중부유럽 · 체코",
+    "regionLabel": "Central Europe · Czechia",
+    "regionKo": "중부유럽",
     "poster": "assets/cesky_krumlov/poster.jpg",
     "map": "assets/cesky_krumlov/map.jpg",
     "reels": [
-      { "title": "체스키 크롬로프 하루 코스", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "One Day in Český Krumlov", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -46,12 +52,14 @@
     "city": "Menton",
     "cityKo": "망통",
     "country": "France",
+    "countryKo": "프랑스",
     "region": "europe",
-    "regionLabel": "서유럽 · 프랑스",
+    "regionLabel": "Western Europe · France",
+    "regionKo": "서유럽",
     "poster": "assets/menton/poster.jpg",
     "map": "assets/menton/map.jpg",
     "reels": [
-      { "title": "이탈리아 같은 프랑스, 망통", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "The Riviera Town That Feels Italian", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -59,12 +67,14 @@
     "city": "Dubrovnik",
     "cityKo": "두브로브니크",
     "country": "Croatia",
+    "countryKo": "크로아티아",
     "region": "europe",
-    "regionLabel": "남유럽 · 크로아티아",
+    "regionLabel": "Southern Europe · Croatia",
+    "regionKo": "남유럽",
     "poster": "assets/dubrovnik/poster.jpg",
     "map": "assets/dubrovnik/map.jpg",
     "reels": [
-      { "title": "성벽 너머의 두브로브니크", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "Dubrovnik Beyond the Walls", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -72,12 +82,14 @@
     "city": "Istanbul",
     "cityKo": "이스탄불",
     "country": "Türkiye",
+    "countryKo": "튀르키예",
     "region": "turkey",
-    "regionLabel": "튀르키예 · 이스탄불",
+    "regionLabel": "Türkiye · Istanbul",
+    "regionKo": "튀르키예",
     "poster": "assets/istanbul/poster.jpg",
     "map": "assets/istanbul/map.jpg",
     "reels": [
-      { "title": "두 대륙 사이, 이스탄불", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "Istanbul, Between Two Continents", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -85,12 +97,14 @@
     "city": "Cappadocia",
     "cityKo": "카파도키아",
     "country": "Türkiye",
+    "countryKo": "튀르키예",
     "region": "turkey",
-    "regionLabel": "튀르키예 · 카파도키아",
+    "regionLabel": "Türkiye · Cappadocia",
+    "regionKo": "튀르키예",
     "poster": "assets/cappadocia/poster.jpg",
     "map": "assets/cappadocia/map.jpg",
     "reels": [
-      { "title": "아침이 날아오르는 곳, 카파도키아", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "Where Mornings Take Flight", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -98,12 +112,14 @@
     "city": "Taipei",
     "cityKo": "타이베이",
     "country": "Taiwan",
+    "countryKo": "대만",
     "region": "asia",
-    "regionLabel": "동아시아 · 대만",
+    "regionLabel": "East Asia · Taiwan",
+    "regionKo": "동아시아",
     "poster": "assets/taipei/poster.jpg",
     "map": "assets/taipei/map.jpg",
     "reels": [
-      { "title": "타이베이 골목과 야시장", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "Taipei Alleys & Night Markets", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -111,12 +127,14 @@
     "city": "An Giang",
     "cityKo": "안장",
     "country": "Vietnam",
+    "countryKo": "베트남",
     "region": "asia",
-    "regionLabel": "동남아 · 베트남",
+    "regionLabel": "Southeast Asia · Vietnam",
+    "regionKo": "동남아",
     "poster": "assets/anzhang/poster.jpg",
     "map": "assets/anzhang/map.jpg",
     "reels": [
-      { "title": "안장, 10초의 여행", "url": "https://www.instagram.com/journeywithlumi/" }
+      { "title": "An Giang in 10 Seconds", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   }
 ]
