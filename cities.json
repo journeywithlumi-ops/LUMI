@@ -10,6 +10,11 @@
     "regionKo": "중부유럽",
     "poster": "assets/hallstatt/poster.jpg",
     "map": "assets/hallstatt/map.jpg",
+    "mapFile": "Hallstatt_Map.png",
+    "mapSize": "3.2 MB",
+    "mapPixels": "941 × 1672",
+    "mapFull": "https://drive.google.com/uc?export=view&id=19UkJpwMEA3sK14eC17VfoNTWnCJc7gYK",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=19UkJpwMEA3sK14eC17VfoNTWnCJc7gYK",
     "reels": [
       { "title": "Hallstatt's 5 Best Views", "url": "https://www.instagram.com/journeywithlumi/" },
       { "title": "Hallstatt in Winter", "url": "https://www.instagram.com/journeywithlumi/" },
@@ -27,6 +32,11 @@
     "regionKo": "서유럽",
     "poster": "assets/seville/poster.jpg",
     "map": "assets/seville/map.jpg",
+    "mapFile": "Seville_Map.png",
+    "mapSize": "3.8 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1OsvYtjatCMEW0Mu4NnheuAh9H1rDNcPf",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1OsvYtjatCMEW0Mu4NnheuAh9H1rDNcPf",
     "reels": [
       { "title": "Plaza de España Photo Spots", "url": "https://www.instagram.com/journeywithlumi/" },
       { "title": "Seville Cathedral & Alcázar", "url": "https://www.instagram.com/journeywithlumi/" }
@@ -43,6 +53,11 @@
     "regionKo": "중부유럽",
     "poster": "assets/cesky_krumlov/poster.jpg",
     "map": "assets/cesky_krumlov/map.jpg",
+    "mapFile": "Cesky_Krumlov_Map.png",
+    "mapSize": "4.2 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=14JAe_idQIfY3UeFJxlVlNaNuoBu99VBm",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=14JAe_idQIfY3UeFJxlVlNaNuoBu99VBm",
     "reels": [
       { "title": "One Day in Český Krumlov", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
@@ -58,8 +73,33 @@
     "regionKo": "서유럽",
     "poster": "assets/menton/poster.jpg",
     "map": "assets/menton/map.jpg",
+    "mapFile": "Menton_Map.png",
+    "mapSize": "3.5 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=16vUAuIqB3_UAEfFx_C_NyH4qlqVD9PU1",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=16vUAuIqB3_UAEfFx_C_NyH4qlqVD9PU1",
     "reels": [
       { "title": "The Riviera Town That Feels Italian", "url": "https://www.instagram.com/journeywithlumi/" }
+    ]
+  },
+  {
+    "id": "strasbourg",
+    "city": "Strasbourg",
+    "cityKo": "스트라스부르",
+    "country": "France",
+    "countryKo": "프랑스",
+    "region": "europe",
+    "regionLabel": "Western Europe · France",
+    "regionKo": "서유럽",
+    "poster": "assets/strasbourg/poster.jpg",
+    "map": "assets/strasbourg/map.jpg",
+    "mapFile": "Strasbourg_Map.png",
+    "mapSize": "3.2 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1bOODT3dklrGdJMV_aqc4Gb0S1I21r7Jk",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1bOODT3dklrGdJMV_aqc4Gb0S1I21r7Jk",
+    "reels": [
+      { "title": "Strasbourg's Winter Magic", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
   },
   {
@@ -73,6 +113,11 @@
     "regionKo": "남유럽",
     "poster": "assets/dubrovnik/poster.jpg",
     "map": "assets/dubrovnik/map.jpg",
+    "mapFile": "Dubrovnik_Map.png",
+    "mapSize": "3.6 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=13K-Q7c50G2Wy_lMW9HKQyieMnkQws3Bj",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=13K-Q7c50G2Wy_lMW9HKQyieMnkQws3Bj",
     "reels": [
       { "title": "Dubrovnik Beyond the Walls", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
@@ -88,6 +133,11 @@
     "regionKo": "튀르키예",
     "poster": "assets/istanbul/poster.jpg",
     "map": "assets/istanbul/map.jpg",
+    "mapFile": "Istanbul_Map.png",
+    "mapSize": "3.9 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1bgWtvfE_XjAuonDoQAVoeRdJxO-uKL0u",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1bgWtvfE_XjAuonDoQAVoeRdJxO-uKL0u",
     "reels": [
       { "title": "Istanbul, Between Two Continents", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
@@ -103,6 +153,11 @@
     "regionKo": "튀르키예",
     "poster": "assets/cappadocia/poster.jpg",
     "map": "assets/cappadocia/map.jpg",
+    "mapFile": "Cappadocia_Map.png",
+    "mapSize": "3.4 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1SbSVBu_WFZO5B3bDNgxxCqRbHJNbYBMq",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1SbSVBu_WFZO5B3bDNgxxCqRbHJNbYBMq",
     "reels": [
       { "title": "Where Mornings Take Flight", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
@@ -118,6 +173,11 @@
     "regionKo": "동아시아",
     "poster": "assets/taipei/poster.jpg",
     "map": "assets/taipei/map.jpg",
+    "mapFile": "Taipei_Map.png",
+    "mapSize": "3.3 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1rLvG0p-r8vTqw3IH-bzVWOiA3lUcK8i0",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1rLvG0p-r8vTqw3IH-bzVWOiA3lUcK8i0",
     "reels": [
       { "title": "Taipei Alleys & Night Markets", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
@@ -133,6 +193,11 @@
     "regionKo": "동남아",
     "poster": "assets/anzhang/poster.jpg",
     "map": "assets/anzhang/map.jpg",
+    "mapFile": "An_Giang_Map.png",
+    "mapSize": "4.1 MB",
+    "mapPixels": "1122 × 1402",
+    "mapFull": "https://drive.google.com/uc?export=view&id=1u--njTWXt6wkTnvelfJOFdeBDNf3mfF-",
+    "mapDownload": "https://drive.google.com/uc?export=download&id=1u--njTWXt6wkTnvelfJOFdeBDNf3mfF-",
     "reels": [
       { "title": "An Giang in 10 Seconds", "url": "https://www.instagram.com/journeywithlumi/" }
     ]
